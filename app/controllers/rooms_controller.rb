@@ -1,11 +1,14 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: :show
+  helper_method :current_room
 
   def new; end
 
   def create
-    @room = Room.create(room_params)
-    redirect_to action: :show, params: { id: @room.id, password: @room.password } if @room
+    @room = Room.create!(room_params)
+    if @room
+      redirect_to room_path(@room.id, params: { password: @room.password })
+    end
   end
 
   def show

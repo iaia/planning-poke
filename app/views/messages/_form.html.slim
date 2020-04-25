@@ -1,2 +1,3 @@
-- form_with message do |f|
+= form_with model: Message.new do |f|
   = f.text_field :body
+  = f.submit

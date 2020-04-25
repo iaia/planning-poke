@@ -3,7 +3,9 @@
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
-  resource :rooms
+  resources :users, only: :create
+  resources :rooms, only: %i[new create show]
+  resources :messages, only: %i[new create]
 
-  root to: 'rooms#new'
+  root to: 'users#new'
 end
