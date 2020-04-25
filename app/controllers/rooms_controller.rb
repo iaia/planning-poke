@@ -4,7 +4,8 @@ class RoomsController < ApplicationController
   def new; end
 
   def create
-    Room.create(room_params)
+    @room = Room.create(room_params)
+    redirect_to action: :show, params: { id: @room.id, password: @room.password } if @room
   end
 
   def show
@@ -18,8 +19,7 @@ class RoomsController < ApplicationController
   end
 
   def set_room
-    p params[:id]
-    @room = Room.find(params[:id])
+    @room = Room.find_by(id: params[:id])
     if @room && @room&.authenticate(params[:password])
     else
       redirect_to action: :new
