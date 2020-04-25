@@ -15,4 +15,6 @@
 #  index_messages_on_user_id  (user_id)
 #
 class Message < ApplicationRecord
+  belongs_to :user
+  belongs_to :room
 end

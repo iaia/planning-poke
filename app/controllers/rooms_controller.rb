@@ -9,7 +9,7 @@ class RoomsController < ApplicationController
   end
 
   def show
-    session[:room_id] = @room.id
+    session[:room_id] = current_room.id
   end
 
   private
@@ -24,5 +24,9 @@ class RoomsController < ApplicationController
     else
       redirect_to action: :new
     end
+  end
+
+  def current_room
+    @current_room ||= @room
   end
 end
