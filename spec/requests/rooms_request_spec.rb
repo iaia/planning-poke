@@ -18,17 +18,24 @@ RSpec.describe 'Rooms', type: :request do
   end
 
   describe 'show' do
-    context '' do
-      let!(:room) do
-        Room.create!(
-          name: 'test-room',
-          password: 'test-password'
-        )
-      end
+    let!(:room) do
+      Room.create!(
+        name: 'test-room',
+        password: 'test-password'
+      )
+    end
 
+    context '' do
       it '' do
-        get rooms_path(room.id)
+        get rooms_path, params: { id: room.id, password: 'test-password' }
         expect(response).to have_http_status(200)
+      end
+    end
+
+    context '' do
+      it '' do
+        get rooms_path, params: { id: room.id, password: 'different' }
+        expect(response).to redirect_to(action: :new)
       end
     end
   end
