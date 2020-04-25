@@ -16,12 +16,10 @@ ActiveRecord::Schema.define(version: 2020_04_25_073535) do
   enable_extension "plpgsql"
 
   create_table "rooms", force: :cascade do |t|
-    t.string "uuid", null: false
     t.string "name", null: false
-    t.string "password_digdest", null: false
+    t.string "password_digest", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["uuid"], name: "index_rooms_on_uuid", unique: true
   end
 
 end

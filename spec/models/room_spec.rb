@@ -2,19 +2,31 @@
 #
 # Table name: rooms
 #
-#  id               :bigint           not null, primary key
-#  name             :string           not null
-#  password_digdest :string           not null
-#  uuid             :string           not null
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#
-# Indexes
-#
-#  index_rooms_on_uuid  (uuid) UNIQUE
+#  id              :bigint           not null, primary key
+#  name            :string           not null
+#  password_digest :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 require 'rails_helper'
 
 RSpec.describe Room, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '.create' do
+    let(:params) do
+      {
+        name: 'test-room',
+        password: 'test-password'
+      }
+    end
+
+    context 'validation' do
+      it 'success' do
+        room = Room.new(params)
+        expect(room).to be_valid
+        room.save!
+        expect(room.name).to eq 'test-room'
+        expect(room.password).to eq 'test-password'
+      end
+    end
+  end
 end
