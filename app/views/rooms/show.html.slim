@@ -1,0 +1,3 @@
+= @room.name
+
+= render 'messages/form', message: @room.messages.build(user: current_user)
