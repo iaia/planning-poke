@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :current_room, :set_room, except: %i[index create]
+  before_action :current_room, :set_room, except: %i[index new create]
   helper_method :current_room
 
   def index
