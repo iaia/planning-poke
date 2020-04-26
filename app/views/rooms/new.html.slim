@@ -3,3 +3,7 @@
   = f.text_field :password, placeholder: 'password'
   = f.submit
 
+= form_with url: rooms_path, method: :get, local: true do |f|
+  = f.number_field :id, placeholder: 'id'
+  = f.text_field :password, placeholder: 'password'
+  = f.submit
