@@ -10,5 +10,5 @@
 #
 class User < ApplicationRecord
   has_many :messages
-  belongs_to :room, counter_cache: :user_count
+  belongs_to :room, counter_cache: :user_count, optional: true
 end
