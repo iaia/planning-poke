@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
     )
     ActionCable.server.broadcast(
       'room_channel',
-      content: @message.body
+      message: @message.body
     )
   end
 
