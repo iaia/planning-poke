@@ -15,5 +15,25 @@
 require 'rails_helper'
 
 RSpec.describe Issue, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '.create' do
+    context 'valid params' do
+      let(:room) do
+        create(:room)
+      end
+      let(:params) do
+        {
+          issue_number: '#123',
+          room_id: room.id
+        }
+      end
+
+      it '' do
+        issue = Issue.new(params)
+        expect(issue).to be_valid
+        issue.save!
+        expect(issue.issue_number).to eq '#123'
+        expect(issue.room).to eq room
+      end
+    end
+  end
 end

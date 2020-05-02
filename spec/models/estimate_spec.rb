@@ -17,5 +17,30 @@
 require 'rails_helper'
 
 RSpec.describe Estimate, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '.create' do
+    context 'valid params' do
+      let(:user) do
+        create(:user)
+      end
+      let(:issue) do
+        create(:issue)
+      end
+      let(:params) do
+        {
+          point: 1,
+          user_id: user.id,
+          issue_id: issue.id
+        }
+      end
+
+      it '' do
+        estimate = Estimate.new(params)
+        expect(estimate).to be_valid
+        estimate.save!
+        expect(estimate.point).to eq 1
+        expect(estimate.user).to eq user
+        expect(estimate.issue).to eq issue
+      end
+    end
+  end
 end
