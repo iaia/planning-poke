@@ -9,6 +9,8 @@
 #  room_id    :bigint
 #
 class User < ApplicationRecord
-  has_many :messages
   belongs_to :room, counter_cache: :user_count, optional: true
+
+  has_many :messages
+  has_many :estimates
 end
