@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :users, only: :create
   resources :rooms, only: %i[new index create show]
   resources :messages, only: %i[new create]
+  resources :issues, only: %i[create]
 
   root to: 'users#new'
 end
