@@ -1,9 +1,25 @@
-= form_with model: Room.new, local: true do |f|
-  = f.text_field :name, placeholder: 'room name'
-  = f.text_field :password, placeholder: 'password'
-  = f.submit
+.col.s6
+  .card
+    .card-content
+      span.card-title Create Room
+      = form_with model: Room.new, local: true do |f|
+        .input-field
+          = f.text_field :name
+          = f.label :name
+        .input-field
+          = f.text_field :password
+          = f.label :password
+        = f.submit 'Create', class: 'btn waves-effect waves-light'
 
-= form_with url: rooms_path, method: :get, local: true do |f|
-  = f.number_field :id, placeholder: 'id'
-  = f.text_field :password, placeholder: 'password'
-  = f.submit
+.col.s6
+  .card
+    .card-content
+      span.card-title Find Room
+      = form_with url: rooms_path, method: :get, local: true do |f|
+        .input-field
+          = f.number_field :id
+          = f.label :id
+        .input-field
+          = f.text_field :password
+          = f.label :password
+        = f.submit 'Find', class: 'btn waves-effect waves-light'

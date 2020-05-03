@@ -1,3 +1,7 @@
-= form_with model: Estimate.new do |f|
-  = f.text_field :point
-  = f.submit
+.card
+  .card-content
+    = form_with model: Estimate.new do |f|
+      .input-field
+        = f.text_field :point
+        = f.label :point
+      = f.submit

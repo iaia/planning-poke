@@ -1,7 +1,5 @@
-.room
-  = current_room.name
-.user
-  = current_user.name
+- content_for(:room_name) { current_room.name }
+- content_for(:user_name) { current_user.name }
 
 = render 'issues/form'
 = render 'estimates/form'
