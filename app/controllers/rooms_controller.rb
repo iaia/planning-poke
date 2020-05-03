@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
   before_action :current_room, :set_room, except: %i[index new create]
 
   def index
-    @current_room = Room.find_by(id: params[:id])&.authenticate(params[:password])
+    @current_room = Room.find_by(id: join_room_params[:id])&.authenticate(join_room_params[:password])
     if @current_room
       set_room
       redirect_to room_path(current_room.id)
@@ -28,6 +28,10 @@ class RoomsController < ApplicationController
   end
 
   private
+
+  def join_room_params
+    params.require(:room).permit(:id, :password)
+  end
 
   def room_params
     params.require(:room).permit(:name, :password)
