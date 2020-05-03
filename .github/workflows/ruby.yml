@@ -29,6 +29,8 @@ jobs:
         ruby-version: 2.7.1
     - name: Install dependencies
       run: bundle install
+    - name: Install yarn-files
+      run: yarn install --check-files
     - name: Create DB
       run: bundle exec rails db:create && bundle exec rails db:migrate
     - name: Run tests
