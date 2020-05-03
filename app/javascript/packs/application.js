@@ -7,6 +7,9 @@ require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
 
+// TODO: jqueryから脱却したい
+require('jquery')
+
 import '../stylesheets/application'
 import 'materialize-css/dist/js/materialize'
 
