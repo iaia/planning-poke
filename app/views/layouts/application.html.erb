@@ -14,10 +14,11 @@
     <nav>
       <div class="nav-wrapper">
         <div class="brand-logo">
-          <%= content_for?(:room_name) ? yield(:room_name) : "" %>
+          Planning-Poke
         </div>
         <ul class="right">
           <li><%= content_for?(:user_name) ? yield(:user_name) : "" %></li>
+          <li><%= content_for?(:room_name) ? yield(:room_name) : "" %></li>
           <li>nav微妙</li>
         </ul>
       </div>

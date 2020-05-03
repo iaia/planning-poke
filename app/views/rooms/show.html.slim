@@ -2,4 +2,6 @@
 - content_for(:user_name) { current_user.name }
 
 = render 'issues/form'
-= render partial: 'issues/issue', collection: @issues
+
+.issues#issues
+  = render partial: 'issues/issue', collection: @issues
