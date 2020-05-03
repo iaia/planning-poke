@@ -1,7 +1,5 @@
-.card
-  .card-content
-    = form_with model: Estimate.new do |f|
-      .input-field
-        = f.text_field :point
-        = f.label :point
-      = f.submit
+= form_with model: Estimate.new do |f|
+  .input-field
+    = f.text_field :point
+    = f.label :point
+  = f.submit 'Create', class: 'btn waves-effect waves-light'

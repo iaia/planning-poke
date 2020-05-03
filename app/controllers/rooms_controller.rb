@@ -1,6 +1,5 @@
 class RoomsController < ApplicationController
   before_action :current_room, :set_room, except: %i[index new create]
-  helper_method :current_room
 
   def index
     @current_room = Room.find_by(id: params[:id])&.authenticate(params[:password])
@@ -24,7 +23,9 @@ class RoomsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @issues = current_room.issues.order(id: :desc)
+  end
 
   private
 
@@ -36,9 +37,5 @@ class RoomsController < ApplicationController
     current_user.room = current_room
     current_user.save!
     session[:room_id] = current_room.id
-  end
-
-  def current_room
-    @current_room ||= Room.find_by(id: session[:room_id])
   end
 end
