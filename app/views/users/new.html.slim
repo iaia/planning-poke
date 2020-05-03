@@ -1,3 +1,8 @@
-= form_with model: User.new, local: true do |f|
-  = f.text_field :name
-  = f.submit
+.col.s6.offset-s3
+  .card
+    = form_with model: User.new, local: true, class: '' do |f|
+      .card-content
+        .input-field
+          = f.text_field :name, class: 'input-field'
+          = f.label :name
+        = f.submit 'Create', class: 'btn waves-effect waves-light'
