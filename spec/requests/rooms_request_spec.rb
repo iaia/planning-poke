@@ -29,14 +29,14 @@ RSpec.describe 'Rooms', type: :request do
     context 'valid password' do
       it '' do
         get rooms_path, room: { id: @room.id, password: 'test-password' }
-        expect(response).to have_http_status(200)
+        expect(last_response.status).to eq 302
       end
     end
 
     context 'invalid password' do
       it '' do
         get rooms_path, room: { id: @room.id, password: 'different' }
-        expect(response).to redirect_to(action: :new)
+        expect(last_response).to be_redirect
       end
     end
   end

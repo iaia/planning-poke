@@ -2,13 +2,10 @@ require 'rails_helper'
 
 RSpec.describe 'Estimates', type: :request do
   before do
-    with_session(:issue) do
-      post users_path, params: { user: { name: 'tester' } }
-      post rooms_path, params: { room: { name: 'testroom', password: 'pass' } }
-      post issues_path, params: { issue: { issue_number: '#123' } }, xhr: true
-      json ||= JSON.parse(last_response.body)
-      @issue_id = json['id']
-    end
+    post users_path, user: { name: 'tester' }
+    post rooms_path, room: { name: 'testroom', password: 'pass' }
+    post issues_path, issue: { issue_number: '#123' }, format: :js, xhr: true
+    @issue_id = Issue.find_by(issue_number: '#123').id
   end
 
   describe 'POST #create' do
@@ -22,7 +19,7 @@ RSpec.describe 'Estimates', type: :request do
 
       it 'estimateが作成される' do
         expect do
-          post estimates_path, params: { estimate: params }
+          post estimates_path, estimate: params
         end.to change(Estimate, :count).by(1)
       end
 
@@ -39,15 +36,11 @@ RSpec.describe 'Estimates', type: :request do
       end
 
       it '1人がestimatesを設定しても通知されない' do
-        expect do
-          post estimates_path, params: { estimate: params }
-        end.to change(Estimate, :count).by(1)
+        post estimates_path, estimate: params
       end
 
       it '2人がestimatesを設定すると通知される' do
-        expect do
-          post estimates_path, params: { estimate: params }
-        end.to change(Estimate, :count).by(1)
+        post estimates_path, estimate: params
       end
     end
 
@@ -59,7 +52,17 @@ RSpec.describe 'Estimates', type: :request do
         }
       end
 
+      before do
+        post estimates_path, estimate: {
+          point: 0,
+          issue_id: @issue_id
+        }
+      end
+
       it '新たに作成されず更新される' do
+        expect do
+          post estimates_path, estimate: params
+        end.not_to change(Estimate, :count)
       end
     end
   end

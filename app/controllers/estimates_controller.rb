@@ -2,7 +2,8 @@ class EstimatesController < ApplicationController
   before_action :check_room
 
   def create
-    @estimate = current_user.estimates.create(estimate_params)
+    @estimate = current_user.estimates.find_by(issue_id: estimate_params[:issue_id])
+    @estimate ||= current_user.estimates.create(estimate_params)
 
     if current_room.messages.pluck(:user_id).size == current_room.user_count
       body = current_room.estimates.map do |m|
