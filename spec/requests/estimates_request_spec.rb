@@ -1,11 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe 'Estimates', type: :request do
+  let(:action_cable_mock) do
+    double
+  end
+
   before do
     post users_path, user: { name: 'tester' }
     post rooms_path, room: { name: 'testroom', password: 'pass' }
     post issues_path, issue: { issue_number: '#123' }, format: :js, xhr: true
     @issue_id = Issue.find_by(issue_number: '#123').id
+
+    allow(ActionCable).to receive(:server).and_return action_cable_mock
+    allow(action_cable_mock).to receive(:broadcast)
   end
 
   describe 'POST #create' do
@@ -24,6 +31,8 @@ RSpec.describe 'Estimates', type: :request do
       end
 
       it '1人がestimatesを設定すると通知される' do
+        post estimates_path, estimate: params
+        expect(action_cable_mock).to have_received(:broadcast)
       end
     end
 
@@ -37,10 +46,12 @@ RSpec.describe 'Estimates', type: :request do
 
       it '1人がestimatesを設定しても通知されない' do
         post estimates_path, estimate: params
+        expect(action_cable_mock).not_to receive(:broadcast)
       end
 
       it '2人がestimatesを設定すると通知される' do
         post estimates_path, estimate: params
+        expect(action_cable_mock).to have_received(:broadcast)
       end
     end
 

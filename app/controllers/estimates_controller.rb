@@ -4,10 +4,10 @@ class EstimatesController < ApplicationController
   def create
     @estimate = current_user.estimates.find_by(issue_id: estimate_params[:issue_id])
     @estimate ||= current_user.estimates.create(estimate_params)
-
-    if current_room.messages.pluck(:user_id).size == current_room.user_count
-      body = current_room.estimates.map do |m|
-        "#{m.user.name}: #{m.points}\n"
+    current_issue = @estimate.issue
+    if current_issue.estimates.pluck(:user_id).size == current_room.user_count
+      body = current_issue.estimates.map do |m|
+        "#{m.user.name}: #{m.point}\n"
       end
       ActionCable.server.broadcast(
         'room_channel',

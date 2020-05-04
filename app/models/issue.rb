@@ -14,4 +14,5 @@
 #
 class Issue < ApplicationRecord
   belongs_to :room
+  has_many :estimates
 end
