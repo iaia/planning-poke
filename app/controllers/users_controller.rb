@@ -4,7 +4,11 @@ class UsersController < ApplicationController
   def create
     @user = User.create!(user_params)
     session[:user_id] = @user.id
-    redirect_to new_room_path
+
+    respond_to do |format|
+      format.html { redirect_to new_room_path }
+      format.json { @user }
+    end
   end
 
   private

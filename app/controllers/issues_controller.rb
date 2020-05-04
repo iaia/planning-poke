@@ -1,6 +1,10 @@
 class IssuesController < ApplicationController
   def create
     @issue = current_room.issues.create(issue_params)
+    respond_to do |format|
+      format.html
+      format.json { @issue }
+    end
   end
 
   private
