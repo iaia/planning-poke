@@ -17,4 +17,12 @@
 class Estimate < ApplicationRecord
   belongs_to :issue
   belongs_to :user
+
+  class << self
+    def create_or_find_by_issue_id(current_user, estimate_params)
+      estimate = current_user.estimates.find_by(issue_id: estimate_params[:issue_id])
+      estimate ||= current_user.estimates.create(estimate_params)
+      estimate
+    end
+  end
 end
