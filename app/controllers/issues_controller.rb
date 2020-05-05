@@ -3,7 +3,7 @@ class IssuesController < ApplicationController
     @issue = current_room.issues.create(issue_params)
     respond_to do |format|
       format.html
-      format.json { @issue }
+      format.json { render json: @issue }
     end
   end
 
