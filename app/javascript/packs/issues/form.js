@@ -14,16 +14,21 @@ document.addEventListener("DOMContentLoaded", () => {
     data: {
       issue: {
         issue_number: ""
-      }
-      issues: []
+      },
+      issues: [
+      ]
     },
     methods: {
       createIssue: function() {
         axios.post(`/issues.json`, {
           issue_number: this.issue.issue_number
         }).then(res => {
-          console.log(res.data);
           this.issues.unshift(res.data);
+        });
+      },
+      getIssues: function() {
+        axios.get(`/issues`).then(res => {
+          this.issues = res.data
         });
       }
     }
