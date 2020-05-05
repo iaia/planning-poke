@@ -31,6 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
           this.issues = res.data
         });
       }
+    },
+    created() {
+      this.getIssues()
     }
   })
 });
