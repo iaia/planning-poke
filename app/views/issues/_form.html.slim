@@ -1,7 +1,7 @@
 = javascript_pack_tag 'issues/form'
 
 #issue-form
-  .card
+  .card.issue
     .card-content
       = form_with model: Issue.new, html: { "v-on:submit.stop.prevent": "createIssue" } do |f|
         .input-field
@@ -16,6 +16,8 @@
           == '{{ issue.issue_number }}'
       .card-action
         ul.estimates
+          / TODO: ハッシュ用意しておく
+          / TODO: 選んだものをactiveにしたい
           li v-on:click.submit.stop="setEstimate(issue.id, 0)"
             a.waves-effect.waves-light.btn-small 0
           li v-on:click.submit.stop="setEstimate(issue.id, 1)"
@@ -26,4 +28,13 @@
             a.waves-effect.waves-light.btn-small 3
           li v-on:click.submit.stop="setEstimate(issue.id, 5)"
             a.waves-effect.waves-light.btn-small 5
-
+          li v-on:click.submit.stop="setEstimate(issue.id, 8)"
+            a.waves-effect.waves-light.btn-small 8
+          li v-on:click.submit.stop="setEstimate(issue.id, 13)"
+            a.waves-effect.waves-light.btn-small 13
+          li v-on:click.submit.stop="setEstimate(issue.id, 20)"
+            a.waves-effect.waves-light.btn-small 20
+          li v-on:click.submit.stop="setEstimate(issue.id, 40)"
+            a.waves-effect.waves-light.btn-small 40
+          li v-on:click.submit.stop="setEstimate(issue.id, 100)"
+            a.waves-effect.waves-light.btn-small 100

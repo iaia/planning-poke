@@ -35,6 +35,14 @@ document.addEventListener("DOMContentLoaded", () => {
         axios.post(`/issues/` + issue_id + `/estimates.json`, {
           point: point
         }).then(res => {
+          /*
+           *  TODO: 選んだestimateをactiveにしたい
+           *  this.issues.forEach(item => {
+           *    if (item.id === res.issue_id) {
+           *      item[:estimate] = res
+           *    }
+           *  });
+          */
         });
       }
     },
