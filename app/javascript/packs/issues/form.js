@@ -30,6 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
         axios.get(`/issues`).then(res => {
           this.issues = res.data
         });
+      },
+      setEstimate: function(issue_id, point) {
+        axios.post(`/issues/` + issue_id + `/estimates.json`, {
+          point: point
+        }).then(res => {
+        });
       }
     },
     created() {

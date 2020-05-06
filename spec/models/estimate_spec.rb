@@ -43,4 +43,23 @@ RSpec.describe Estimate, type: :model do
       end
     end
   end
+
+  describe '.create_or_find_by_issue_id' do
+    context '' do
+      let(:point) do
+        1
+      end
+      let(:user) do
+        create(:user)
+      end
+      let(:issue_id) do
+        create(:issue).id
+      end
+      it '' do
+        expect do
+          Estimate.create_or_find_by_issue_id(user, issue_id, point)
+        end.to change(Estimate, :count).by(1)
+      end
+    end
+  end
 end

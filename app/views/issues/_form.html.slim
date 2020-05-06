@@ -16,14 +16,14 @@
           == '{{ issue.issue_number }}'
       .card-action
         ul.estimates
-          li
+          li v-on:click.submit.stop="setEstimate(issue.id, 0)"
             a.waves-effect.waves-light.btn-small 0
-          li
+          li v-on:click.submit.stop="setEstimate(issue.id, 1)"
             a.waves-effect.waves-light.btn-small 1
-          li
+          li v-on:click.submit.stop="setEstimate(issue.id, 2)"
             a.waves-effect.waves-light.btn-small 2
-          li
+          li v-on:click.submit.stop="setEstimate(issue.id, 3)"
             a.waves-effect.waves-light.btn-small 3
-          li
+          li v-on:click.submit.stop="setEstimate(issue.id, 5)"
             a.waves-effect.waves-light.btn-small 5
 
