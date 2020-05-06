@@ -6,8 +6,9 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
-    "jquery": "^3.5.0",
+    "axios": "^0.19.2",
     "materialize-css": "^1.0.0",
+    "pug-loader": "^2.4.0",
     "vue": "^2.6.11",
     "vue-loader": "^15.9.2",
     "vue-template-compiler": "^2.6.11"

@@ -855,7 +855,7 @@ Layout/LineLength:
   VersionAdded: '0.25'
   VersionChanged: '0.78'
   AutoCorrect: false
-  Max: 80
+  Max: 100
   # To make it possible to copy or click on URIs in the code, we allow lines
   # containing a URI to be longer than Max.
   AllowHeredoc: true
@@ -1908,7 +1908,7 @@ Metrics/MethodLength:
   VersionAdded: '0.25'
   VersionChanged: '0.59.2'
   CountComments: false  # count full line comments?
-  Max: 10
+  Max: 20
   ExcludedMethods: []
 
 Metrics/ModuleLength:
@@ -2275,7 +2275,7 @@ Style/ArrayJoin:
 Style/AsciiComments:
   Description: 'Use only ascii symbols in comments.'
   StyleGuide: '#english-comments'
-  Enabled: true
+  Enabled: false
   VersionAdded: '0.9'
   VersionChanged: '0.52'
   AllowedChars: []

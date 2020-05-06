@@ -1,7 +1,29 @@
-.card
-  .card-content
-    = form_with model: Issue.new do |f|
-      .input-field
-        = f.text_field :issue_number
-        = f.label :issue_number
-      = f.submit 'Create', class: 'btn waves-effect waves-light'
+= javascript_pack_tag 'issues/form'
+
+#issue-form
+  .card
+    .card-content
+      = form_with model: Issue.new, html: { "v-on:submit.stop.prevent": "createIssue" } do |f|
+        .input-field
+          = f.text_field :issue_number, "v-model": "issue.issue_number"
+          = f.label :issue_number
+        = f.submit 'Create', class: 'btn waves-effect waves-light'
+
+  .issues v-for="issue in issues"
+    .card.issue v-bind:class="'issue-' + issue.id"
+      .card-content
+        span.card-title
+          == '{{ issue.issue_number }}'
+      .card-action
+        ul.estimates
+          li v-on:click.submit.stop="setEstimate(issue.id, 0)"
+            a.waves-effect.waves-light.btn-small 0
+          li v-on:click.submit.stop="setEstimate(issue.id, 1)"
+            a.waves-effect.waves-light.btn-small 1
+          li v-on:click.submit.stop="setEstimate(issue.id, 2)"
+            a.waves-effect.waves-light.btn-small 2
+          li v-on:click.submit.stop="setEstimate(issue.id, 3)"
+            a.waves-effect.waves-light.btn-small 3
+          li v-on:click.submit.stop="setEstimate(issue.id, 5)"
+            a.waves-effect.waves-light.btn-small 5
+

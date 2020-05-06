@@ -8,7 +8,7 @@ RSpec.describe 'Estimates', type: :request do
   before do
     post users_path, user: { name: 'tester' }
     post rooms_path, room: { name: 'testroom', password: 'pass' }
-    post issues_path, issue: { issue_number: '#123' }, format: :js, xhr: true
+    post issues_path, issue: { issue_number: '#123' }, format: :json, xhr: true
     @issue_id = Issue.find_by(issue_number: '#123').id
 
     allow(ActionCable).to receive(:server).and_return action_cable_mock
@@ -26,12 +26,12 @@ RSpec.describe 'Estimates', type: :request do
 
       it 'estimateが作成される' do
         expect do
-          post estimates_path, estimate: params
+          post estimates_path(issue_id: @issue_id), estimate: params, format: :json
         end.to change(Estimate, :count).by(1)
       end
 
       it '1人がestimatesを設定すると通知される' do
-        post estimates_path, estimate: params
+        post estimates_path(issue_id: @issue_id), estimate: params, format: :json
         expect(action_cable_mock).to have_received(:broadcast)
       end
     end
@@ -45,12 +45,12 @@ RSpec.describe 'Estimates', type: :request do
       end
 
       it '1人がestimatesを設定しても通知されない' do
-        post estimates_path, estimate: params
+        post estimates_path(issue_id: @issue_id), estimate: params, format: :json
         expect(action_cable_mock).not_to receive(:broadcast)
       end
 
       it '2人がestimatesを設定すると通知される' do
-        post estimates_path, estimate: params
+        post estimates_path(issue_id: @issue_id), estimate: params, format: :json
         expect(action_cable_mock).to have_received(:broadcast)
       end
     end
@@ -64,7 +64,7 @@ RSpec.describe 'Estimates', type: :request do
       end
 
       before do
-        post estimates_path, estimate: {
+        post estimates_path(issue_id: @issue_id), estimate: {
           point: 0,
           issue_id: @issue_id
         }
@@ -72,7 +72,7 @@ RSpec.describe 'Estimates', type: :request do
 
       it '新たに作成されず更新される' do
         expect do
-          post estimates_path, estimate: params
+          post estimates_path(issue_id: @issue_id), estimate: params, format: :json
         end.not_to change(Estimate, :count)
       end
     end

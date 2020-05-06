@@ -17,4 +17,14 @@
 class Estimate < ApplicationRecord
   belongs_to :issue
   belongs_to :user
+
+  # TODO: issue_idとuser_idでunique index張る
+
+  class << self
+    def create_or_find_by_issue_id(current_user, issue_id, point)
+      estimate = current_user.estimates.find_by(issue_id: issue_id)
+      estimate ||= current_user.estimates.create(issue_id: issue_id, point: point)
+      estimate
+    end
+  end
 end
