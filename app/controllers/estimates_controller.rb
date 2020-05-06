@@ -7,7 +7,7 @@ class EstimatesController < ApplicationController
     )
     return if current_issue.estimates.pluck(:user_id).size != current_room.user_count
 
-    RoomChannel.send_message(current_room.id, current_issue)
+    RoomChannel.send_estimates(current_room.id, current_issue)
   end
 
   private

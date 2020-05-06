@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     'X-Requested-With': 'XMLHttpRequest',
     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
   };
-  const app = new Vue({
+  const roomVm = new Vue({
     el: "#issue-form",
     data: {
       issue: {
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         axios.post(`/issues.json`, {
           issue_number: this.issue.issue_number
         }).then(res => {
-          this.issues.unshift(res.data);
+          //this.issues.unshift(res.data);
         });
       },
       getIssues: function() {
@@ -50,4 +50,5 @@ document.addEventListener("DOMContentLoaded", () => {
       this.getIssues()
     }
   })
+  window.app = roomVm;
 });

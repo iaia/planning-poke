@@ -13,7 +13,12 @@ consumer.subscriptions.create({
   },
 
   received(data) {
-    alert(data['message']);
+    console.log(data);
+    if (data['notify'] === 'new-issue') {
+      window.app.getIssues();
+    } else {
+      alert(data['message']);
+    }
   },
 
   speak: function(message) {

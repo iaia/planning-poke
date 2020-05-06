@@ -8,6 +8,7 @@ class IssuesController < ApplicationController
 
   def create
     @issue = current_room.issues.create(issue_params)
+    RoomChannel.notify_new_issue(current_room.id)
     respond_to do |format|
       format.html
       format.json { render json: @issue }
