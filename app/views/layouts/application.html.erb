@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-  <head>
+  <head
+    <%= yield(:header_attributes) %>
+    >
     <title>PlanningPoke</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>

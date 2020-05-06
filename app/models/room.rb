@@ -18,4 +18,6 @@ class Room < ApplicationRecord
   has_many :messages
   has_many :users
   has_many :issues
+
+  # TODO: UUIDを作って、ActionCableのchannelとかではそれ使いたい
 end

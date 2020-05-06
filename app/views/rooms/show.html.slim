@@ -1,4 +1,7 @@
 - content_for(:room_name) { current_room.name }
 - content_for(:user_name) { current_user.name }
+- content_for(:header_attributes) { \
+    "data-current-room-id=#{current_room.id}" \
+  }
 
 = render 'issues/form'
