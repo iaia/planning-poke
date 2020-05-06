@@ -20,4 +20,5 @@ class Room < ApplicationRecord
   has_many :issues
 
   # TODO: UUIDを作って、ActionCableのchannelとかではそれ使いたい
+  # TODO: 閉じる機能が欲しい 例えば30分使われていなければ「閉じて」、アクセス出来ないようにする
 end
