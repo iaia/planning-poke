@@ -16,4 +16,10 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name)
   end
+
+  def redirect_when_signed_in
+    if session[:user_id]&.positive?
+      redirect_to new_room_path
+    end
+  end
 end
