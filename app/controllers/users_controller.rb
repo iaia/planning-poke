@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :redirect_when_signed_in
+
   def new; end
 
   def create

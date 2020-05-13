@@ -31,7 +31,7 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @issues = current_room.issues.order(id: :desc)
+    # @issues = current_room.issues.order(id: :desc)
   end
 
   private
