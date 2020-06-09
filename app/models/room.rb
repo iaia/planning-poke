@@ -36,5 +36,15 @@ class Room < ApplicationRecord
     self.closed_at = Time.current + 30.minutes
   end
 
-  # TODO: 閉じる機能が欲しい 例えば30分使われていなければ「閉じて」、アクセス出来ないようにする
+  def closed?
+    closed_at < Time.current
+  end
+
+  def prolong
+    return if closed?
+    return if closed_at > Time.current + 5.minutes
+
+    self.closed_at = Time.current + 30.minutes
+    save(validate: false)
+  end
 end

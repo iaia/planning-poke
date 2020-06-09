@@ -16,4 +16,10 @@
 class Issue < ApplicationRecord
   belongs_to :room
   has_many :estimates
+
+  after_create :prolong_room
+
+  def prolong_room
+    room.prolong
+  end
 end
