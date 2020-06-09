@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2020_06_09_134437) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_count", default: 0, null: false
     t.string "uuid"
-    t.datetime "closed_at", default: "2020-06-09 13:46:50", null: false
+    t.datetime "closed_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
   end
 
   create_table "users", force: :cascade do |t|
