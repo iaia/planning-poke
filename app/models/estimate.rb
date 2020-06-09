@@ -18,6 +18,8 @@ class Estimate < ApplicationRecord
   belongs_to :issue
   belongs_to :user
 
+  after_create :prolong_room
+
   # TODO: issue_idとuser_idでunique index張る
 
   class << self
@@ -30,5 +32,9 @@ class Estimate < ApplicationRecord
       end
       estimate
     end
+  end
+
+  def prolong_room
+    room.prolong
   end
 end

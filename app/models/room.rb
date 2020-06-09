@@ -3,12 +3,14 @@
 # Table name: rooms
 #
 #  id              :bigint           not null, primary key
+#  closed_at       :datetime         not null
 #  name            :string           not null
 #  password_digest :string           not null
 #  user_count      :integer          default(0), not null
 #  uuid            :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#
 
 require 'securerandom'
 
@@ -22,11 +24,27 @@ class Room < ApplicationRecord
   has_many :users
   has_many :issues
 
-  before_create :set_uuid
+  before_create :set_uuid, :set_closed_at
+
+  scope :opening, -> { where('closed_at >= ?', Time.current) }
 
   def set_uuid
     self.uuid = SecureRandom.uuid
   end
 
-  # TODO: 閉じる機能が欲しい 例えば30分使われていなければ「閉じて」、アクセス出来ないようにする
+  def set_closed_at
+    self.closed_at = Time.current + 30.minutes
+  end
+
+  def closed?
+    closed_at < Time.current
+  end
+
+  def prolong
+    return if closed?
+    return if closed_at > Time.current + 5.minutes
+
+    self.closed_at = Time.current + 30.minutes
+    save(validate: false)
+  end
 end

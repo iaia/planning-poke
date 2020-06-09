@@ -3,6 +3,7 @@
 # Table name: rooms
 #
 #  id              :bigint           not null, primary key
+#  closed_at       :datetime         not null
 #  name            :string           not null
 #  password_digest :string           not null
 #  user_count      :integer          default(0), not null
