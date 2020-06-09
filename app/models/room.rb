@@ -9,7 +9,9 @@
 #  uuid            :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#
+
+require 'securerandom'
+
 class Room < ApplicationRecord
   has_secure_password
 
@@ -20,6 +22,11 @@ class Room < ApplicationRecord
   has_many :users
   has_many :issues
 
-  # TODO: UUIDを作って、ActionCableのchannelとかではそれ使いたい
+  before_create :set_uuid
+
+  def set_uuid
+    self.uuid = SecureRandom.uuid
+  end
+
   # TODO: 閉じる機能が欲しい 例えば30分使われていなければ「閉じて」、アクセス出来ないようにする
 end

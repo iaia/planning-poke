@@ -17,8 +17,8 @@
       span.card-title Join Room
       = form_with url: rooms_path, model: Room.new, method: :get, local: true do |f|
         .input-field
-          = f.number_field :id
-          = f.label :id
+          = f.text_field :uuid
+          = f.label :uuid
         .input-field
           = f.text_field :password
           = f.label :password
