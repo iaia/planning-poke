@@ -17,6 +17,7 @@ consumer.subscriptions.create({
     if (data['notify'] === 'new-issue') {
       window.app.getIssues();
     } else {
+      window.app.getIssues();
       alert(data['message']);
     }
   },

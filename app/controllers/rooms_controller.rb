@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
   before_action :current_room, :set_room, except: %i[index new create]
 
   def index
-    @current_room = Room.find_by(id: join_room_params[:id])
+    @current_room = Room.find_by(uuid: join_room_params[:uuid])
       &.authenticate(join_room_params[:password])
 
     respond_to do |format|
@@ -31,13 +31,13 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @issues = current_room.issues.order(id: :desc)
+    # @issues = current_room.issues.order(id: :desc)
   end
 
   private
 
   def join_room_params
-    params.require(:room).permit(:id, :password)
+    params.require(:room).permit(:uuid, :password)
   end
 
   def room_params

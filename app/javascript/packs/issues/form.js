@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       getIssues: function() {
         axios.get(`/issues`).then(res => {
+          console.log(res.data)
           this.issues = res.data
         });
       },
@@ -46,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     },
-    created() {
+    mounted() {
       this.getIssues()
     }
   })
