@@ -1,8 +1,9 @@
 class RoomsController < ApplicationController
-  before_action :current_room, :set_room, except: %i[index new create]
+  before_action :current_room, :set_room, only: %i[show]
 
   def index
-    @current_room = Room.find_by(uuid: join_room_params[:uuid])
+    @current_room = Room.opening
+      .find_by(uuid: join_room_params[:uuid])
       &.authenticate(join_room_params[:password])
 
     respond_to do |format|

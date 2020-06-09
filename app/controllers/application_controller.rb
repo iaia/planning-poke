@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   end
 
   def current_room
-    @current_room ||= Room.find_by(id: session[:room_id])
+    @current_room ||= Room.opening.find_by(id: session[:room_id])
   end
 end
