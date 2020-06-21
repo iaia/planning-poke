@@ -33,7 +33,11 @@ class Room < ApplicationRecord
   end
 
   def set_closed_at
-    self.closed_at = Time.current + 30.minutes
+    self.closed_at = if Rails.env.development?
+                       Time.current + 1.day
+                     else
+                       Time.current + 30.minutes
+                     end
   end
 
   def closed?

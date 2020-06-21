@@ -18,12 +18,11 @@
       .card-action
         .estimate-aggregate v-show="issue.done"
           .estimate v-for="estimate in issue.estimates"
-            .user
-              user
-              == '{{ estimate.user_id }}'
-            .point
-              point
-              == '{{ estimate.point }}'
+            .done-estimate
+              .user
+                == '{{ estimate.user.name }}'
+              .point
+                == '{{ estimate.point }}'
 
         ul.estimates
           / TODO: ハッシュ用意しておく

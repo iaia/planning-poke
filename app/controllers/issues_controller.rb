@@ -1,9 +1,12 @@
 class IssuesController < ApplicationController
   def index
     @issues = current_room.issues.doing.order(id: :desc)
-    @issues += current_room.issues.done.left_joins(:estimates).order(id: :desc)
+    @issues += current_room.issues
+      .done
+      .left_joins(estimates: :user)
+      .order(id: :desc)
     respond_to do |format|
-      format.json { render json: @issues, include: [:estimates] }
+      format.json { render json: @issues, include: { estimates: { include: :user } } }
     end
   end
 
