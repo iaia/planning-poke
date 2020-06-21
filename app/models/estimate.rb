@@ -35,6 +35,6 @@ class Estimate < ApplicationRecord
   end
 
   def prolong_room
-    room.prolong
+    issue.room.prolong
   end
 end
