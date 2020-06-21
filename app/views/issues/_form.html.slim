@@ -8,7 +8,7 @@
         .input-field
           = f.text_field :issue_number, "v-model": "issue.issue_number"
           = f.label :issue_number
-        = f.submit 'Create', class: 'btn waves-effect waves-light'
+        = button_tag 'Create', class: 'btn waves-effect waves-light'
 
   .issues v-for="issue in issues"
     .card.issue v-bind:class="'issue-' + issue.id"
