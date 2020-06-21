@@ -4,6 +4,7 @@ class IssuesController < ApplicationController
     @issues += current_room.issues
       .done
       .left_joins(estimates: :user)
+      .distinct
       .order(id: :desc)
     respond_to do |format|
       format.json { render json: @issues, include: { estimates: { include: :user } } }

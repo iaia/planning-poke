@@ -18,7 +18,7 @@ consumer.subscriptions.create({
       window.app.getIssues();
     } else {
       window.app.getIssues();
-      alert(data['message']);
+      // alert(data['message']);
     }
   },
 
