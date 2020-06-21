@@ -19,6 +19,9 @@ class Issue < ApplicationRecord
 
   after_create :prolong_room
 
+  scope :done, -> { where('done = true') }
+  scope :doing, -> { where('done = false') }
+
   def prolong_room
     room.prolong
   end
