@@ -1,6 +1,10 @@
 .col.s6.offset-s3
   .card
     .card-content
+      p 3 steps
+      p create user -> create(or join) room -> create issue
+  .card
+    .card-content
       = form_with model: User.new, local: true, class: '' do |f|
         .input-field
           = f.text_field :name, class: 'input-field'

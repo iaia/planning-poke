@@ -4,9 +4,19 @@
     "data-current-room-id=#{current_room.id}" \
   }
 
-p
-  | UUIDとパスワード付きのリンク置きたい
-p
-  = current_room.uuid
+.col.s6
+  = render 'issues/form'
 
-= render 'issues/form'
+.col.s6
+  .card
+    .card-content
+      span.card-title
+        | UUID
+      p
+        = current_room.uuid
+  .card
+    .card-content
+      span.card-title
+        | この部屋にいる人
+      p
+        | を表示したいね...
