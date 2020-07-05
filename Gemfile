@@ -13,6 +13,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'pg', '>= 0.18', '< 2.0'
 
 gem 'jbuilder', '~> 2.7'
+gem 'active_model_serializers'
 gem 'sass-rails', '>= 6'
 gem 'slim'
 gem 'webpacker', '~> 4.0'
