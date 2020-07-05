@@ -1,3 +1,4 @@
 class IssueSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :issue_number
+  has_many :estimates
 end
