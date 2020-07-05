@@ -10,7 +10,7 @@ class IssuesController < ApplicationController
       .left_joins(estimates: :user)
       .order(id: :desc)
     respond_to do |format|
-      format.json { render json: @issues, include: { estimates: :user } }
+      format.json { render json: @issues, include: '**' }
     end
   end
 

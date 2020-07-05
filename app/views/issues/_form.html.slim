@@ -16,7 +16,7 @@
         span.card-title
           == '{{ issue.issue_number }}'
       .card-action
-        .estimate-aggregate v-show="issue.done"
+        .estimate-aggregate
           .estimate v-for="estimate in issue.estimates"
             .done-estimate
               .user
