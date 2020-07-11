@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :current_room, :set_room, only: %i[show]
+  before_action :logged_in?, :direct_in, :current_room, :set_room, only: %i[show]
 
   def index
     @current_room = Room.opening
@@ -43,6 +43,17 @@ class RoomsController < ApplicationController
 
   def room_params
     params.require(:room).permit(:name, :password)
+  end
+
+  def direct_in
+    return if current_room
+    return unless params[:uuid]
+    room = Room.find_by(uuid: params[:uuid])
+    if room
+      session[:room_id] = room.id
+    else
+      redirect_to action: :new
+    end
   end
 
   def set_room
