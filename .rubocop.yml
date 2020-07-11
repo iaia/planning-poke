@@ -416,7 +416,7 @@ Layout/EmptyComment:
 
 Layout/EmptyLineAfterGuardClause:
   Description: 'Add empty line after guard clause.'
-  Enabled: true
+  Enabled: false
   VersionAdded: '0.56'
   VersionChanged: '0.59'
 
@@ -2255,7 +2255,7 @@ Style/Alias:
 Style/AndOr:
   Description: 'Use &&/|| instead of and/or.'
   StyleGuide: '#no-and-or-or'
-  Enabled: true
+  Enabled: false
   VersionAdded: '0.9'
   VersionChanged: '0.25'
   # Whether `and` and `or` are banned only in conditionals (conditionals)
@@ -2867,7 +2867,7 @@ Style/GlobalVars:
 Style/GuardClause:
   Description: 'Check for conditionals that can be replaced with guard clauses.'
   StyleGuide: '#no-nested-conditionals'
-  Enabled: true
+  Enabled: false
   VersionAdded: '0.20'
   VersionChanged: '0.22'
   # `MinBodyLength` defines the number of lines of the a body of an `if` or `unless`
@@ -2935,7 +2935,7 @@ Style/IfUnlessModifier:
                  Favor modifier if/unless usage when you have a
                  single-line body.
   StyleGuide: '#if-as-a-modifier'
-  Enabled: true
+  Enabled: false
   VersionAdded: '0.9'
   VersionChanged: '0.30'
 
