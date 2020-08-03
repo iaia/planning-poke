@@ -1,6 +1,7 @@
 class IssuesController < ApplicationController
   def index
     @issues = current_room.issues
+      .distinct
       .doing
       .left_joins(estimates: :user)
       .order(id: :desc)
