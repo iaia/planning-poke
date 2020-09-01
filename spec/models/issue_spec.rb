@@ -29,12 +29,82 @@ RSpec.describe Issue, type: :model do
         }
       end
 
-      it '' do
+      it 'issueが作れる' do
         issue = Issue.new(params)
         expect(issue).to be_valid
         issue.save!
         expect(issue.issue_number).to eq '#123'
         expect(issue.room).to eq room
+      end
+    end
+
+    context 'state' do
+      let(:room) do
+        create(:room)
+      end
+      let(:issue) do
+        create(:issue)
+      end
+
+      context 'init' do
+        it 'createdになっている' do
+          expect(issue).to be_created
+        end
+      end
+
+      context '#estimating' do
+        context 'createdのとき' do
+          it 'doingになる' do
+            issue.estimating
+            expect(issue).to be_doing
+          end
+        end
+
+        context 'すでにestimatingしているとき' do
+          before do
+            issue.estimating!
+          end
+
+          it 'doingのまま' do
+            issue.estimating
+            expect(issue).to be_doing
+          end
+        end
+
+        context 'すでにpublishしているとき' do
+          before do
+            issue.estimating!
+            issue.publish!
+          end
+
+          it 'publishedのまま' do
+            issue.estimating
+            expect(issue).to be_published
+          end
+        end
+      end
+
+      context '#publish' do
+        before do
+          issue.estimating!
+          expect(issue).to be_doing
+        end
+
+        it 'doingのまま' do
+          issue.publish
+          expect(issue).to be_published
+        end
+      end
+
+      context '#done' do
+        before do
+          issue.estimating!
+        end
+
+        it 'doneになる' do
+          issue.done
+          expect(issue).to be_done
+        end
       end
     end
   end
