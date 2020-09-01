@@ -22,6 +22,10 @@ class Issue < ApplicationRecord
   scope :done, -> { where('done = true') }
   scope :doing, -> { where('done = false') }
 
+  def done!
+    update!(done: true)
+  end
+
   def prolong_room
     room.prolong
   end

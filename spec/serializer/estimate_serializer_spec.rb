@@ -19,16 +19,37 @@ RSpec.describe EstimateSerializer, type: :serializer do
       let(:estimate) do
         Estimate.create!(params)
       end
-      let(:json) do
-        str = <<-JSON
+
+      context 'issueがdone' do
+        let(:json) do
+          str = <<-JSON
     {"id":#{estimate.id},"point":1,"user":{"name":"iaia"}}
-        JSON
-        str.gsub(/\s/, '')
+          JSON
+          str.gsub(/\s/, '')
+        end
+
+        before do
+          issue.done!
+        end
+
+        it 'jsonが正しい' do
+          serializer = EstimateSerializer.new(estimate)
+          expect(serializer.to_json).to eq json
+        end
       end
 
-      it '' do
-        serializer = EstimateSerializer.new(estimate)
-        expect(serializer.to_json).to eq json
+      context 'issueがdone' do
+        let(:json) do
+          str = <<-JSON
+    {"id":#{estimate.id},"point":"?","user":{"name":"iaia"}}
+          JSON
+          str.gsub(/\s/, '')
+        end
+
+        it 'jsonが正しい' do
+          serializer = EstimateSerializer.new(estimate)
+          expect(serializer.to_json).to eq json
+        end
       end
     end
   end

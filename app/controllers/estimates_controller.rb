@@ -8,7 +8,7 @@ class EstimatesController < ApplicationController
     RoomChannel.send_estimates(current_room.id, current_issue)
     if current_issue.estimates.pluck(:user_id).size != current_room.user_count
     else
-      current_issue.update!(done: true) # FIXME: false想定
+      current_issue.done!
     end
   end
 
