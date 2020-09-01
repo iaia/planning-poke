@@ -19,22 +19,48 @@ RSpec.describe IssueSerializer, type: :serializer do
         )
       end
 
-      let(:json) do
-        str = <<-JSON
+      context 'issueがdone' do
+        let(:json) do
+          str = <<-JSON
   {"id":#{issue.id},"issue_number":"#123","estimates":[{"id":#{estimate.id},"point":1,"user":{"name":"iaia"}}]}
-        JSON
-        str.gsub(/\s/, '')
+          JSON
+          str.gsub(/\s/, '')
+        end
+
+        before do
+          issue.done!
+        end
+
+        it 'jsonが正しい' do
+          current_room = Room.find(issue.room_id)
+          issues = current_room
+            .issues
+            .done
+            .left_joins(estimates: :user)
+            .order(id: :desc).first
+          serializer = IssueSerializer.new(issues)
+          expect(serializer.to_json(include: { estimates: :user })).to eq json
+        end
       end
 
-      it '' do
-        current_room = Room.find(issue.room_id)
-        issues = current_room
-          .issues
-          .doing
-          .left_joins(estimates: :user)
-          .order(id: :desc).first
-        serializer = IssueSerializer.new(issues)
-        expect(serializer.to_json(include: { estimates: :user })).to eq json
+      context 'issueが未done' do
+        let(:json) do
+          str = <<-JSON
+  {"id":#{issue.id},"issue_number":"#123","estimates":[{"id":#{estimate.id},"point":"?","user":{"name":"iaia"}}]}
+          JSON
+          str.gsub(/\s/, '')
+        end
+
+        it 'jsonが正しい' do
+          current_room = Room.find(issue.room_id)
+          issues = current_room
+            .issues
+            .doing
+            .left_joins(estimates: :user)
+            .order(id: :desc).first
+          serializer = IssueSerializer.new(issues)
+          expect(serializer.to_json(include: { estimates: :user })).to eq json
+        end
       end
     end
   end

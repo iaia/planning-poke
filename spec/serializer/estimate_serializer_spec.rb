@@ -38,7 +38,7 @@ RSpec.describe EstimateSerializer, type: :serializer do
         end
       end
 
-      context 'issueがdone' do
+      context 'issueが未done' do
         let(:json) do
           str = <<-JSON
     {"id":#{estimate.id},"point":"?","user":{"name":"iaia"}}
