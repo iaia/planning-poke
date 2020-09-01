@@ -12,7 +12,7 @@ gem 'puma', '~> 4.3'
 gem 'bcrypt', '~> 3.1.7'
 gem 'pg', '>= 0.18', '< 2.0'
 
-gem 'jbuilder', '~> 2.7'
+gem 'aasm'
 gem 'active_model_serializers'
 gem 'sass-rails', '>= 6'
 gem 'slim'
