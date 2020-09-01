@@ -3,12 +3,12 @@ class IssuesController < ApplicationController
     @issues = current_room.issues
       .distinct
       .doing
-      .left_joins(estimates: :user)
+      .includes(estimates: :user)
       .order(id: :desc)
     @issues += current_room.issues
       .done
       .distinct
-      .left_joins(estimates: :user)
+      .includes(estimates: :user)
       .order(id: :desc)
     respond_to do |format|
       format.json { render json: @issues, include: '**' }
