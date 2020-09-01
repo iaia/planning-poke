@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         axios.post(`/issues.json`, {
           issue_number: this.issue.issue_number
         }).then(res => {
+          this.issue.issue_number = ""
           //this.issues.unshift(res.data);
         });
       },
